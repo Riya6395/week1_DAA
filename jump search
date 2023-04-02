@@ -1,0 +1,49 @@
+#include<cmath>
+#include<iostream>
+using namespace std;
+int jump_search(int arr[],int n,int key);
+int main()
+{
+    int i,key,loc,n;
+    int arr[10];
+    cout<<"enter the range of items"<<endl;
+    cin>>n;
+    cout<<"enter the array"<<endl;
+    for(i=0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+    cout<<"enter the key to be searched"<<endl;
+    cin>>key;
+    if((loc=jump_search(arr,n,key))>=0)
+    {
+        cout<<"element is present at index: "<<loc<<endl;
+    }
+    else
+    {
+        cout<<"element is not present";
+    }
+}
+int jump_search(int arr[],int n,int key)
+{
+    int i;
+    int start=0;
+    int end=sqrt(n);
+    while(arr[end]<=key && end<n)
+    {
+        start=end;
+        end+=sqrt(n);
+        if(end>n-1)
+        {
+            end=n;
+        }
+    }
+    for(i=start;i<end;i++)
+    {
+        if(arr[i]==key)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
